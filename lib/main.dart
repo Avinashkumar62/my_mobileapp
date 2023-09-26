@@ -14,15 +14,15 @@ void main() {
 }
 
 class User {
-  late final String username;
+  String username;
 
-  late final String password;
+  String password;
 
-  late final String email;
+  String email;
 
-  late final String firstName;
+  String firstName;
 
-  late final String lastName;
+  String lastName;
   String profilePicture;
 
   User({

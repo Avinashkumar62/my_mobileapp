@@ -36,7 +36,8 @@ class SignupWidget extends State<SignupPage> {
 
     // For this example, we'll consider registration as successful if all fields are filled.
     user.profilePicture = "";
-
+    print(user);
+    print(user.username);
     bool allFieldsFilled = true; // Check if all required fields are filled
 
     if (allFieldsFilled) {
@@ -45,7 +46,8 @@ class SignupWidget extends State<SignupPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const UserListPage(), // Navigate to UserListPage
+          builder: (context) =>
+              const UserListPage(), // Navigate to UserListPage
         ),
       );
       // ignore: dead_code
@@ -75,9 +77,7 @@ class SignupWidget extends State<SignupPage> {
                 child: TextFormField(
                   controller: usernameController,
                   onChanged: (value) {
-                    setState(() {
-                      user.username = value;
-                    });
+                    user.username = value;
                   },
                   decoration: const InputDecoration(
                     labelText: 'Username',
