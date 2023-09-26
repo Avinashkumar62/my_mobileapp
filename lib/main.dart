@@ -38,6 +38,7 @@ class User {
 class AuthState with ChangeNotifier {
   bool isAuthenticated;
   List<User>? users = [];
+  void login() {}
   AuthState({required this.isAuthenticated});
 }
 

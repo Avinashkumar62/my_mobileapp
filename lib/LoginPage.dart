@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_mobileapp/main.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(LoginPage());
@@ -11,7 +13,8 @@ class LoginPage extends StatelessWidget {
 
   // Function to validate the username and password
 
-  bool validateCredentials(String username, String password) {
+  bool validateCredentials(
+      String username, String password, BuildContext context) {
     // Add your validation logic here
 
     // For example, you can check if the username and password match your criteria.
@@ -23,6 +26,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authState = Provider.of<AuthState>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
       body: Center(
@@ -43,6 +47,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 child: TextFormField(
+                  controller: usernameController,
                   decoration: const InputDecoration(
                     labelText: 'UserName',
                     border: InputBorder.none,
@@ -65,6 +70,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 child: TextFormField(
+                  controller: passwordController,
                   decoration: const InputDecoration(
                     labelText: 'Password',
                     border: InputBorder.none,
@@ -86,11 +92,15 @@ class LoginPage extends StatelessWidget {
                     final username = usernameController.text;
                     final password = passwordController.text;
 
+                    if (username == "" && password == "") {
+                      return;
+                    }
                     // Validate the credentials
-
-                    if (validateCredentials(username, password)) {
+                    User user = authState.users!
+                        .firstWhere((element) => element.username == username);
+                    print(username + " " + password);
+                    if (user.password == password) {
                       // If valid, navigate to the next screen (replace 'NextScreen' with your actual screen name)
-
                       Navigator.pushReplacementNamed(context, "/userlist");
                     } else {
                       // If not valid, display an error message
