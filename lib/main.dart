@@ -37,22 +37,7 @@ class User {
 
 class AuthState with ChangeNotifier {
   bool isAuthenticated;
-  List<User>? users = [
-    User(
-        username: "",
-        password: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-        profilePicture: ""),
-    User(
-        username: "",
-        password: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-        profilePicture: "")
-  ];
+  List<User>? users = [];
   AuthState({required this.isAuthenticated});
 }
 

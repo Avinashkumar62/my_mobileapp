@@ -48,8 +48,8 @@ class UserListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final user = authState.users?[index];
           return ListTile(
-            title: Text(user!.username),
-            subtitle: Text(user.email),
+            title: Text(user!.firstName + " " + user.lastName),
+            subtitle: Text(user.username),
           );
         },
       ),
