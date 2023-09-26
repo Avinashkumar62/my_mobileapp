@@ -2,9 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:my_mobileapp/LoginPage.dart';
 import 'package:my_mobileapp/SignupPage.dart';
 import 'package:my_mobileapp/UserListPage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider<AuthState>(
+      create: (context) => AuthState(isAuthenticated: false),
+      child: MyApp(),
+    ),
+  );
+}
+
+class User {
+  late final String username;
+
+  late final String password;
+
+  late final String email;
+
+  late final String firstName;
+
+  late final String lastName;
+  String profilePicture;
+
+  User({
+    required this.username,
+    required this.password,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.profilePicture,
+  });
+}
+
+class AuthState with ChangeNotifier {
+  bool isAuthenticated;
+  List<User>? users = [
+    User(
+        username: "",
+        password: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        profilePicture: ""),
+    User(
+        username: "",
+        password: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        profilePicture: "")
+  ];
+  AuthState({required this.isAuthenticated});
 }
 
 class MyApp extends StatelessWidget {
@@ -12,12 +61,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final state = Provider.of<AuthState>(context);
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(),
-        '/signup': (context) => const SignupPage(),
-        '/userlist': (context) => const UserListPage(),
+        '/': (context) => LoginPage(),
+        '/signup': (context) => SignupPage(),
+        '/userlist': (context) => UserListPage(),
       },
     );
   }

@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const LoginPage());
+  runApp(LoginPage());
 }
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // Function to validate the username and password
+
+  bool validateCredentials(String username, String password) {
+    // Add your validation logic here
+
+    // For example, you can check if the username and password match your criteria.
+
+    // Return true if valid, false otherwise.
+
+    return username == 'valid_username' && password == 'valid_password';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +83,24 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Add your login logic here
+                    final username = usernameController.text;
+                    final password = passwordController.text;
+
+                    // Validate the credentials
+
+                    if (validateCredentials(username, password)) {
+                      // If valid, navigate to the next screen (replace 'NextScreen' with your actual screen name)
+
+                      Navigator.pushReplacementNamed(context, "/userlist");
+                    } else {
+                      // If not valid, display an error message
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Invalid username or password.'),
+                        ),
+                      );
+                    }
                   },
                   child: const Text('Login'),
                 ),
